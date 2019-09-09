@@ -2,4 +2,4 @@
 
 This project is for PHP development training
 
-(training)[./docs/list.txt]
+[training](./docs/list.txt)
