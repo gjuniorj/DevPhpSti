@@ -233,26 +233,54 @@ function normalizaElementosArray($vetor, $tamanho){
 }
 
 
+/**
+ * Método que imprime um vetor na vertical, com ou sem separador entre os elementos
+ * 
+ * @param array $vetor
+ */
 function imprimeVetorVertical($vetor){
+    
     echo "\nSeparar elementos? (s/n)";
     $comSeparador = strtolower(readline());
     
-    //imprimir elementos com separador
-    if ($comSeparador == 's'){
-        
+    //Verifica se vai imprimir elementos com ou sem separador
+    if ($comSeparador != 's'){
+        //Desenha o vetor na tela sem separador entre elementos
+        vetorComSeparador($vetor, "\n");        
+    }
+    else{ //imprimir elementos com separador
         echo "\nSeparador: ";
         $separador = readline("Separador: \n");
-        
-        //Calculando o tamanho do elemento com maior número de caracteres no array
-        $tamMaiorElem = tamanhoMaiorElementoArray($vetor);
-        
+        echo "\n";
+               
         //Desenha o vetor na tela com separador especificado entre elementos
         vetorComSeparador($vetor, "\n".str_repeat($separador,$tamMaiorElem)."\n");
     }
-    else{ //imprimir elementos sem separador
-        
-        //Desenha o vetor na tela sem separador entre elementos
-        vetorComSeparador($vetor, "\n");
-    }
 }
+
+/**
+ * Método que impime na tela um caracter repetido de acordo com o quantidade de caracteres fornecida
+ * 
+ * @param string $caractere
+ * @param int $quantidade
+ */
+function repetirCaracter($caractere, $quantidade){
+    
+    //Verifica se o caráter não é nulo
+    if ( ($caractere == null) || ($quantidade <= 0) ){
+        echo "Parâmetros incorretos.\n";
+        echo "Caractere: " . $caractere . "\n";
+        echo "Número de repetições: " . $quantidade . "\n";
+        exit();
+    }
+    //Verifica se o caracter é uma string de tamanho 1
+    if (strlen($caractere) > 1){
+        echo "Informar apenas um caractere como delimitador.";
+        exit();   
+    }
+
+    //Imprime delimitador inicial do vetor vertical
+    echo str_repeat($caractere,$quantidade);
+    echo "\n";
+}    
 
