@@ -175,7 +175,7 @@ function retornaMatrizTransposta($matriz){
  *  Função que insere elementos dinamicamente em um array com o limitador de linha especificado
  * @param char $limitador
  */
-function insereElementosDinamicamenteVetor($limitador){
+function insereElementosDinamicamenteVetor($limitador = ''){
 
     $ind = 0;
     
@@ -237,24 +237,25 @@ function normalizaElementosArray($vetor, $tamanho){
  * Método que imprime um vetor na vertical, com ou sem separador entre os elementos
  * 
  * @param array $vetor
+ * @param string $separador
+ * @param integer $numRepeticoesSeparador
  */
-function imprimeVetorVertical($vetor){
+function imprimeVetorVertical($vetor,$separador = '',$numRepeticoesSeparador = 0){
     
-    echo "\nSeparar elementos? (s/n)";
-    $comSeparador = strtolower(readline());
+    //Verifica se a variável passada é um array
+    if ( !is_array($vetor)){
+        echo "ERRO - imprimeVetorVertical - Parâmetro não é um array.";
+        exit();
+    }
     
     //Verifica se vai imprimir elementos com ou sem separador
-    if ($comSeparador != 's'){
+    if ($separador != ''){
+        //Desenha o vetor na tela com separador especificado entre elementos
+        vetorComSeparador($vetor, "\n".str_repeat($separador,$numRepeticoesSeparador)."\n");
+    }
+    else{ 
         //Desenha o vetor na tela sem separador entre elementos
         vetorComSeparador($vetor, "\n");        
-    }
-    else{ //imprimir elementos com separador
-        echo "\nSeparador: ";
-        $separador = readline("Separador: \n");
-        echo "\n";
-               
-        //Desenha o vetor na tela com separador especificado entre elementos
-        vetorComSeparador($vetor, "\n".str_repeat($separador,$tamMaiorElem)."\n");
     }
 }
 
@@ -268,19 +269,19 @@ function repetirCaracter($caractere, $quantidade){
     
     //Verifica se o caráter não é nulo
     if ( ($caractere == null) || ($quantidade <= 0) ){
-        echo "Parâmetros incorretos.\n";
-        echo "Caractere: " . $caractere . "\n";
-        echo "Número de repetições: " . $quantidade . "\n";
+        echo "ERRO - repetirCaracter - Parâmetros incorretos.\n";
+        echo "ERRO - repetirCaracter - Caractere: " . $caractere . "\n";
+        echo "ERRO - repetirCaracter - Número de repetições: " . $quantidade . "\n";
         exit();
     }
     //Verifica se o caracter é uma string de tamanho 1
     if (strlen($caractere) > 1){
-        echo "Informar apenas um caractere como delimitador.";
+        echo "ERRO - repetirCaracter - Informar apenas um caractere como delimitador.";
         exit();   
     }
 
     //Imprime delimitador inicial do vetor vertical
-    echo str_repeat($caractere,$quantidade);
-    echo "\n";
+    return str_repeat($caractere,$quantidade);
+    
 }    
 
