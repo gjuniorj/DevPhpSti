@@ -26,6 +26,9 @@ if ($comDelimitadores == 's'){
     //Delimitador será formado pelo caractere repetido, de acordo com o tamanho do maior elemento do vetor
     $delimitador = repetirCaracter($caracter, $tamMaiorElemVetor);    
 }
+else{
+    $delimitador = '';
+}
 
 
 //**** Tratando separador entre os elementos do vetor vertical ****//
