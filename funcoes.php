@@ -212,21 +212,34 @@ function tamanhoMaiorElementoArray($vetor){
 /**
  * Função que normaliza todos os elementos de um array, de forma que todos possuam o mesmo número de caracteres.
  * A função preenche cada elemento com espaços em branco até o tamanho passado.
+ * Retorna um vetor normalizado.
  * 
  * @param array $vetor
  * @param int $tamanho
+ * @param string $alinhamento
  */
-function normalizaElementosArray($vetor, $tamanho){
+function normalizaElementosArray($vetor, $tamanho, $alinhamento = ''){
     
     $tamVetor = count($vetor);
     $vetorNormalizado = array();
     
     //percorrendo o array
     for ($i=0; $i<$tamVetor; $i++){
-        
+
         $espacos = str_repeat(" ", $tamanho - strlen($vetor[$i]));
-        array_push($vetorNormalizado, '|' . $vetor[$i] . $espacos . '|');
-            
+        
+        //Verifica o alinhamento fornecido
+        if ($alinhamento == 'd'){
+            //alinha elementos à direita
+            array_push($vetorNormalizado, '|' . $espacos . $vetor[$i] . '|');
+        }
+        elseif ($alinhamento == 'e'){
+            //alinha elementos à esquerda
+            array_push($vetorNormalizado, '|' . $vetor[$i] . $espacos . '|');
+        }
+//        else{
+//            
+//        }
     }
     
     return $vetorNormalizado;
@@ -234,7 +247,8 @@ function normalizaElementosArray($vetor, $tamanho){
 
 
 /**
- * Método que imprime um vetor na vertical, com ou sem separador entre os elementos
+ * Método que imprime um vetor na vertical, com ou sem separador entre os elementos. 
+ * O separador é formado pelo número de repetições fornecido.
  * 
  * @param array $vetor
  * @param string $separador
