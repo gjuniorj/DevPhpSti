@@ -14,7 +14,7 @@ $tamMaiorElemVetor = tamanhoMaiorElementoArray($vetor);
 
 
 //*** Alinhando elementos do vetor à direita e gravando num novo vetor ***//
-$vetorAlinhado = normalizaElementosArray($vetor, $tamMaiorElemVetor,'d');
+$vetorAlinhado = normalizaElementosArray($vetor, $tamMaiorElemVetor,'e');
 //Calcula o tamanho do maior elemento do vetor fornecido
 $tamMaiorElemVetorAlinhado = tamanhoMaiorElementoArray($vetorAlinhado);
 

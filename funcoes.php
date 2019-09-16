@@ -197,6 +197,28 @@ function insereElementosDinamicamenteVetor($limitador = ''){
 }
 
 /**
+ * Função que insere elementos dinamicamente na matriz.
+ * Retorna matriz criada.
+ */
+function insereElementosMatriz(){
+    echo "INSERIR ELEMENTOS NA MATRIZ\n";
+    
+    echo "Defina o número de linhas: ";
+    $numLinhasMat = readline();
+    
+    $matriz = array();
+    
+    for ($i=0; $i<$numLinhasMat; $i++){
+        $numLinha = $i+1;
+        echo "Linha " . $numLinha . ":\n";
+        $matriz[$i] = array();
+        array_push($matriz[$i],insereElementosDinamicamenteVetor());
+    }
+    
+    return $matriz;
+}
+
+/**
  * Função que retorna o tamanho do elemento com maior número de caracteres num array
  * 
  * @param array $vetor
@@ -230,16 +252,13 @@ function normalizaElementosArray($vetor, $tamanho, $alinhamento = ''){
         
         //Verifica o alinhamento fornecido
         if ($alinhamento == 'd'){
-            //alinha elementos à direita
+            //alinha elemento à direita
             array_push($vetorNormalizado, '|' . $espacos . $vetor[$i] . '|');
         }
         elseif ($alinhamento == 'e'){
-            //alinha elementos à esquerda
+            //alinha elemento à esquerda
             array_push($vetorNormalizado, '|' . $vetor[$i] . $espacos . '|');
         }
-//        else{
-//            
-//        }
     }
     
     return $vetorNormalizado;
@@ -298,4 +317,7 @@ function repetirCaracter($caractere, $quantidade){
     return str_repeat($caractere,$quantidade);
     
 }    
+
+
+
 
