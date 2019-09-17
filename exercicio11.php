@@ -7,21 +7,49 @@ include "funcoes.php";
 
 
 //Criando matriz dinamicamente
-$matriz = insereElementosMatriz();
+$matriz = criarMatrizDinamicamente();
 
-var_dump($matriz);
+desenhaMatriz($matriz);
 
-////Calcula o tamanho do maior elemento do vetor fornecido
-//$tamMaiorElemVetor = tamanhoMaiorElementoArray($vetor);
-//
-//
-////*** Alinhando elementos do vetor e gravando num novo vetor ***//
-//$vetorAlinhado = normalizaElementosArray($vetor, $tamMaiorElemVetor);
-////Calcula o tamanho do maior elemento do vetor fornecido
-//$tamMaiorElemVetorAlinhado = tamanhoMaiorElementoArray($vetorAlinhado);
-//
-//
-//
+//$teste = vetificarVetorNumerico($matriz[0]);
+//var_dump($teste);
+
+$matrizTransp = retornaMatrizTransposta($matriz);
+echo"\n";
+desenhaMatriz($matrizTransp);
+echo"\n";
+
+$matrizTranspLinhasAlinhadas = retornarMatrizComLinhasAlinhadas($matrizTransp);
+
+echo"\n";
+desenhaMatriz($matrizTranspLinhasAlinhadas);
+echo"\n";
+    
+    
+    
+//    //Calcula o tamanho do maior elemento do vetor normalizado para cálculo da posição dos delimitadores posteriormente.
+//    $tamMaiorElemVetorAlinhado = tamanhoMaiorElementoArray($vetorAlinhado);
+//    
+//    //Delimitador de início e fim da matriz será formado pelo caractere repetido, 
+//    // de acordo com o tamanho do maior elemento do vetor
+//    $delimitador = repetirCaracter('*', $tamMaiorElemVetorAlinhado);     
+//    
+//    //Imprime delimitador de início
+//    echo "$delimitador\n";
+//      
+//    imprimeVetorVertical($vetorAlinhado); 
+//    
+//    //Imprime delimitador de fim
+//    echo "\n$delimitador";    
+//    
+
+
+
+
+
+
+
+
 ////**** Tratando delimitador inicial e final do vetor vertical ****//
 ////Verifica se o vetor terá delimitadores de início e fim
 //echo "\nInserir delimitadores no início e no fim do vetor? (s/n) ";
@@ -38,7 +66,7 @@ var_dump($matriz);
 //else{
 //    $delimitador = '';
 //}
-//
+
 //
 //
 ////**** Tratando separador entre os elementos do vetor vertical ****//

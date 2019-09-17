@@ -31,7 +31,7 @@ function desenhaMatriz($matriz){
     
     /** @var $linha array */
     foreach ($matriz as $linha) {
-        vetorComMarcadoresInicioFim($linha,',','','');
+        vetorComMarcadoresInicioFim($linha,'','','');
     }
     
 }
@@ -200,7 +200,7 @@ function insereElementosDinamicamenteVetor($limitador = ''){
  * Função que insere elementos dinamicamente na matriz.
  * Retorna matriz criada.
  */
-function insereElementosMatriz(){
+function criarMatrizDinamicamente(){
     echo "INSERIR ELEMENTOS NA MATRIZ\n";
     
     echo "Defina o número de linhas: ";
@@ -208,14 +208,73 @@ function insereElementosMatriz(){
     
     $matriz = array();
     
+    //Utilizando a função que insere elementos dinamicamente no vetor para inserir na matriz.
+    //Cada vetor criado corresponde a uma linha na matriz.
     for ($i=0; $i<$numLinhasMat; $i++){
         $numLinha = $i+1;
+        echo "========\n";
         echo "Linha " . $numLinha . ":\n";
-        $matriz[$i] = array();
-        array_push($matriz[$i],insereElementosDinamicamenteVetor());
+        echo "========\n";
+        array_push($matriz,insereElementosDinamicamenteVetor());
+        echo "\n";
     }
     
     return $matriz;
+}
+
+
+/**
+ * Função que alinha elementos das linhas da matriz e retorna uma matriz com as linhas alinhadas. Se todos os elementos da 
+ * linha forem numéricos, estes serão alinhados à direita.Se pelo menos um elemento for texto, então todos os elementos da 
+ * linha serão alinhados à esquerda. 
+ * 
+ * @param array $matriz
+ */
+function retornarMatrizComLinhasAlinhadas($matriz){
+
+    $matrizAlinhada = array();
+
+    foreach ($matriz as $linhaMat){
+
+        //Calcula o tamanho do maior elemento na linha da matriz
+        $tamMaiorElemLinha = tamanhoMaiorElementoArray($linhaMat);
+
+        //Verifica se todos os elementos da linha são numéricos
+        if ( verificarVetorNumerico($linhaMat) ){
+
+            //Todos elementos são numéricos. Então, alinhamento à direita.
+            $vetorAlinhado = normalizaElementosArray($linhaMat, $tamMaiorElemLinha,'d');
+
+        }
+        else{
+            //Pelo menos um elemento não é numérico. Então, alinhamento à esquerda.
+            $vetorAlinhado = normalizaElementosArray($linhaMat, $tamMaiorElemLinha,'e');
+
+        }
+
+        array_push($matrizAlinhada,$vetorAlinhado);
+    }
+    
+    return $matrizAlinhada;
+    
+}
+
+/**
+ * Função que verifica se todos os elementos de um vetor são numéricos.
+ * Retorna true se todos forem numéricos. E retorna false caso pelo menos um dos elementos do vetor não seja numérico.
+ * 
+ * @param array $vetor
+ */
+function verificarVetorNumerico($vetor){
+    
+    //Verifica cada elemento vetor
+    foreach ($vetor as $elemento){
+        
+        if ( !(is_numeric($elemento)) ){
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
