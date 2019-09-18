@@ -31,7 +31,7 @@ function desenhaMatriz($matriz){
     
     /** @var $linha array */
     foreach ($matriz as $linha) {
-        vetorComMarcadoresInicioFim($linha,'','','');
+        vetorComMarcadoresInicioFim($linha,'|','','');
     }
     
 }
@@ -145,7 +145,28 @@ function retornaColuna($matriz, $nColuna){
 
     return $vetColuna;
         
-}            
+}     
+
+/**
+ * Função que retorna o número de colunas existentes numa matriz
+ * 
+ * @param array $matriz
+ */
+function retornarNumColunasMatriz($matriz){
+    
+    $numColunas = 0;
+    
+    //Percorre cada linha da matriz e conta o número de colunas. 
+    foreach ($matriz as $linha){
+        
+        $numColunasNaLinha = count($linha);
+        if ( $numColunasNaLinha > $numColunas ){
+            $numColunas = $numColunasNaLinha;
+        }
+    }
+    
+    return $numColunas;
+}
 
 
 /**
@@ -162,7 +183,8 @@ function retornaMatrizTransposta($matriz){
     else{
         
         $transposta = array();
-        $numColunasMatriz = count($matriz[0]);
+        //$numColunasMatriz = count($matriz[0]);
+        $numColunasMatriz = retornarNumColunasMatriz($matriz);
         
         for ($col=1; $col<=$numColunasMatriz; $col++){
             array_push($transposta, retornaColuna($matriz, $col));
@@ -212,14 +234,47 @@ function criarMatrizDinamicamente(){
     //Cada vetor criado corresponde a uma linha na matriz.
     for ($i=0; $i<$numLinhasMat; $i++){
         $numLinha = $i+1;
+        
         echo "========\n";
         echo "Linha " . $numLinha . ":\n";
         echo "========\n";
+        
+        //Insere vetor digitado na matriz
         array_push($matriz,insereElementosDinamicamenteVetor());
+        
         echo "\n";
     }
     
     return $matriz;
+}
+
+/**
+ * Função que calcula o número de colunas máximo da matriz e completa as linhas que não possuam este número máximo de colunas
+ * 
+ * @param array $matriz
+ */
+function completarMatriz($matriz){
+    
+    //calcula número de colunas em cada linha da matriz e grava num vetor
+    $vetorNumColunasCadaLinha = array_map('count',$matriz);
+    
+    //calcula o número máximo de colunas na matriz, que é dado pela linha com maior número de colunas
+    $numColMaxMatriz = max($vetorNumColunasCadaLinha);
+    
+    //percorre cada linha da matriz e completa suas colunas até atingir o número máximo de colunas na matriz
+    foreach ($matriz as $linha){
+        
+        $numColLinha = count($linha);
+        
+        if ( $numColLinha < $numColMaxMatriz ){
+            
+            //PAREI AQUI!!!!!!!
+            $linha = array_fill();
+            
+        }
+        
+    }
+    
 }
 
 
@@ -312,11 +367,11 @@ function normalizaElementosArray($vetor, $tamanho, $alinhamento = ''){
         //Verifica o alinhamento fornecido
         if ($alinhamento == 'd'){
             //alinha elemento à direita
-            array_push($vetorNormalizado, '|' . $espacos . $vetor[$i] . '|');
+            array_push($vetorNormalizado, $espacos . $vetor[$i] );
         }
         elseif ($alinhamento == 'e'){
             //alinha elemento à esquerda
-            array_push($vetorNormalizado, '|' . $vetor[$i] . $espacos . '|');
+            array_push($vetorNormalizado, $vetor[$i] . $espacos );
         }
     }
     

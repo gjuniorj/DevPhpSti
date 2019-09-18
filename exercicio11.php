@@ -2,7 +2,7 @@
 
 include "funcoes.php";
 
-//Exercício 11 - Desenhar uma matriz com elementos numéricos alinhdos à direita e elementos não-numéricos 
+//Exercício 11 - Desenhar uma matriz com elementos numéricos alinhados à direita e elementos não-numéricos 
 // alinhados à esquerda
 
 
@@ -11,8 +11,13 @@ $matriz = criarMatrizDinamicamente();
 
 desenhaMatriz($matriz);
 
-//$teste = vetificarVetorNumerico($matriz[0]);
-//var_dump($teste);
+$vetorNumColunasCadaLinha = array_map('count',$matriz);
+
+//echo "vetorNumColunasCadaLinha";
+//var_dump($vetorNumColunasCadaLinha);
+//echo "\n";
+//$numColMatriz = max($vetorNumColunasCadaLinha);
+//echo "numColMatriz: $numColMatriz \n";
 
 $matrizTransp = retornaMatrizTransposta($matriz);
 echo"\n";
@@ -21,8 +26,10 @@ echo"\n";
 
 $matrizTranspLinhasAlinhadas = retornarMatrizComLinhasAlinhadas($matrizTransp);
 
+$matrizAlinhada = retornaMatrizTransposta($matrizTranspLinhasAlinhadas);
+
 echo"\n";
-desenhaMatriz($matrizTranspLinhasAlinhadas);
+desenhaMatriz($matrizAlinhada);
 echo"\n";
     
     
