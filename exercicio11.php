@@ -11,13 +11,7 @@ $matriz = criarMatrizDinamicamente();
 
 desenhaMatriz($matriz);
 
-$vetorNumColunasCadaLinha = array_map('count',$matriz);
-
-//echo "vetorNumColunasCadaLinha";
-//var_dump($vetorNumColunasCadaLinha);
-//echo "\n";
-//$numColMatriz = max($vetorNumColunasCadaLinha);
-//echo "numColMatriz: $numColMatriz \n";
+//$matrizCompleta = completarMatriz($matriz);
 
 $matrizTransp = retornaMatrizTransposta($matriz);
 echo"\n";

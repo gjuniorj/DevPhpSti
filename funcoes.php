@@ -31,7 +31,7 @@ function desenhaMatriz($matriz){
     
     /** @var $linha array */
     foreach ($matriz as $linha) {
-        vetorComMarcadoresInicioFim($linha,'|','','');
+        vetorComMarcadoresInicioFim($linha,'|','|','|');
     }
     
 }
@@ -73,11 +73,11 @@ function vetorComSeparador($vetor, $separador){
  */
 function vetorComMarcadoresInicioFim($vetor, $separador, $marcadorInicio, $marcadorFim){
     
-    echo "$marcadorInicio ";
+    echo "$marcadorInicio";
     
     vetorComSeparador($vetor, $separador);
 
-    echo " $marcadorFim";
+    echo "$marcadorFim";
     
     echo "\n";
     
@@ -185,7 +185,8 @@ function retornaMatrizTransposta($matriz){
         $transposta = array();
         //$numColunasMatriz = count($matriz[0]);
         $numColunasMatriz = retornarNumColunasMatriz($matriz);
-        
+
+        // A iteração começa com 1, visto que a função retornaColuna espera o número da coluna (1, 2, ..., etc), e não o seu índice.
         for ($col=1; $col<=$numColunasMatriz; $col++){
             array_push($transposta, retornaColuna($matriz, $col));
         }
@@ -225,23 +226,39 @@ function insereElementosDinamicamenteVetor($limitador = ''){
 function criarMatrizDinamicamente(){
     echo "INSERIR ELEMENTOS NA MATRIZ\n";
     
-    echo "Defina o número de linhas: ";
+    echo "Número de linhas: ";
     $numLinhasMat = readline();
     
+    echo "Número de colunas: ";
+    $numColunasMat = readline();
+
+    //Definindo matriz como sendo um vetor
     $matriz = array();
     
-    //Utilizando a função que insere elementos dinamicamente no vetor para inserir na matriz.
     //Cada vetor criado corresponde a uma linha na matriz.
     for ($i=0; $i<$numLinhasMat; $i++){
+
+        //Definindo que o elemento $i do vetor vai ser outro vetor
+        $matriz[$i] = array();
+        //percorre a linha criada
         $numLinha = $i+1;
-        
+        echo "\nLinha " . $numLinha . "\n";
         echo "========\n";
-        echo "Linha " . $numLinha . ":\n";
-        echo "========\n";
+
+        //Percorre cada coluna da linha corrente
+        for ($j=0; $j < $numColunasMat; $j++){
+
+            //Lê elemento fornecido
+            $numColuna = $j+1;
+            echo "Coluna " . $numColuna . ": " ;
+            $elemento = readline();
+
+            //adiciona no vetor (linha)
+            array_push( $matriz[$i], $elemento );
+            
+        }
         
-        //Insere vetor digitado na matriz
-        array_push($matriz,insereElementosDinamicamenteVetor());
-        
+        //echo "================\n";
         echo "\n";
     }
     
@@ -253,29 +270,34 @@ function criarMatrizDinamicamente(){
  * 
  * @param array $matriz
  */
-function completarMatriz($matriz){
-    
-    //calcula número de colunas em cada linha da matriz e grava num vetor
-    $vetorNumColunasCadaLinha = array_map('count',$matriz);
-    
-    //calcula o número máximo de colunas na matriz, que é dado pela linha com maior número de colunas
-    $numColMaxMatriz = max($vetorNumColunasCadaLinha);
-    
-    //percorre cada linha da matriz e completa suas colunas até atingir o número máximo de colunas na matriz
-    foreach ($matriz as $linha){
-        
-        $numColLinha = count($linha);
-        
-        if ( $numColLinha < $numColMaxMatriz ){
-            
-            //PAREI AQUI!!!!!!!
-            $linha = array_fill();
-            
-        }
-        
-    }
-    
-}
+//function completarMatriz($matriz){
+//    
+//    //calcula número de colunas em cada linha da matriz e grava num vetor
+//    $vetorNumColunasCadaLinha = array_map('count',$matriz);
+//    
+//    //calcula o número de colunas da matriz, que é dado pela linha com maior número de colunas
+//    $numColMatriz = max($vetorNumColunasCadaLinha);
+//    
+//    //percorre cada linha da matriz e completa suas colunas até atingir o número máximo de colunas na matriz
+//    foreach ($matriz as $linha){
+//        
+//        $numColLinha = count($linha);
+//        
+//        if ( $numColLinha < $numColMatriz ){
+//            
+//            //Calcula quantas colunas faltam na linha
+//            $numColunasParaCompletar = $numColMatriz - $numColLinha;
+//            //Calcula a posição (índice) a partir da qual a linha (array) será preenchida
+//            $ind = $numColLinha + 1;
+//            //Preenche array com espaços em branco
+//            $linha = array_fill($ind, $numColunasParaCompletar,'x');
+//            
+//        }
+//        
+//    }
+//    
+//    return $matriz;
+//}
 
 
 /**
@@ -295,7 +317,7 @@ function retornarMatrizComLinhasAlinhadas($matriz){
         $tamMaiorElemLinha = tamanhoMaiorElementoArray($linhaMat);
 
         //Verifica se todos os elementos da linha são numéricos
-        if ( verificarVetorNumerico($linhaMat) ){
+        if ( vetorNumerico($linhaMat) ){
 
             //Todos elementos são numéricos. Então, alinhamento à direita.
             $vetorAlinhado = normalizaElementosArray($linhaMat, $tamMaiorElemLinha,'d');
@@ -320,12 +342,12 @@ function retornarMatrizComLinhasAlinhadas($matriz){
  * 
  * @param array $vetor
  */
-function verificarVetorNumerico($vetor){
+function vetorNumerico($vetor){
     
     //Verifica cada elemento vetor
     foreach ($vetor as $elemento){
         
-        if ( !(is_numeric($elemento)) ){
+        if ( !(is_numeric($elemento)) && ( $elemento != '' ) ){
             return false;
         }
     }
@@ -340,7 +362,7 @@ function verificarVetorNumerico($vetor){
 function tamanhoMaiorElementoArray($vetor){
     
     //Cria um vetor com o tamanho dos elementos do vetor passado
-    $vetTamanhoElementos = array_map('strlen',$vetor);
+    $vetTamanhoElementos = array_map('mb_strlen',$vetor);
     
     return max($vetTamanhoElementos);
 }
@@ -362,7 +384,7 @@ function normalizaElementosArray($vetor, $tamanho, $alinhamento = ''){
     //percorrendo o array
     for ($i=0; $i<$tamVetor; $i++){
 
-        $espacos = str_repeat(" ", $tamanho - strlen($vetor[$i]));
+        $espacos = str_repeat(" ", $tamanho - mb_strlen($vetor[$i]));
         
         //Verifica o alinhamento fornecido
         if ($alinhamento == 'd'){
@@ -422,7 +444,7 @@ function repetirCaracter($caractere, $quantidade){
         exit();
     }
     //Verifica se o caracter é uma string de tamanho 1
-    if (strlen($caractere) > 1){
+    if (mb_strlen($caractere) > 1){
         echo "ERRO - repetirCaracter - Informar apenas um caractere como delimitador.";
         exit();   
     }
