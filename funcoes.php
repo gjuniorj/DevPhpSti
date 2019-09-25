@@ -83,6 +83,20 @@ function vetorComMarcadoresInicioFim($vetor, $separador, $marcadorInicio, $marca
     
 }
 
+/**
+ * Função que retorna o número espaços entre os elementos de um vetor. Estes espaços poderão ser substituídos por um caracter
+ * separador posteriormente por uma outra função.
+ *
+ * @array $vetor
+ */
+function contarEspaçoEntreElementosNoVetor($vetor){
+
+    //Um vetor com n elementos possuirá (n-1) espaços entre esses elementos
+    $numEspaços = count($vetor) - 1;
+
+    return $numEspaços;
+}
+
 
 /**
  * Função que a retorna a linha especificada de uma matriz
@@ -337,6 +351,34 @@ function retornarMatrizComLinhasAlinhadas($matriz){
 }
 
 /**
+ * Função que retorna o somatório do tamanho dos elementos existentes no vetor.
+ *
+ * @array $matriz
+ */
+function somarTamanhosElementosDoVetor($vetor){
+
+    //Verifica se o parâmetro passado é uma matriz
+    if ( !(is_array($vetor)) ){
+        //echo "";
+        exit("ERRO - contarCaracteresLinhaMatriz - Parâmetro não é um array.");
+    }
+
+    //Grava o número de elementos do vetor, que corresponde à primeira linha da matriz
+    $numElementos = count($vetor);
+
+    //Inicializando a variável que vai somar o tamanho dos elementos do vetor
+    $somatorioTamanhosElementos = 0;
+
+    //Percorre elementos do array, somando seus tamanhos
+
+    for ($i =0; $i < $numElementos; $i++){
+        $somatorioTamanhosElementos += mb_strlen($vetor[$i]);
+    }
+
+    return $somatorioTamanhosElementos;
+}
+
+/**
  * Função que verifica se todos os elementos de um vetor são numéricos.
  * Retorna true se todos forem numéricos. E retorna false caso pelo menos um dos elementos do vetor não seja numérico.
  * 
@@ -429,13 +471,13 @@ function imprimeVetorVertical($vetor,$separador = '',$numRepeticoesSeparador = 0
 }
 
 /**
- * Método que impime na tela um caracter repetido de acordo com o quantidade de caracteres fornecida
+ * Método que imprime na tela um caracter repetido de acordo com o quantidade de caracteres fornecida
  * 
  * @param string $caractere
  * @param int $quantidade
  */
-function repetirCaracter($caractere, $quantidade){
-    
+function desenharCaracterRepetido($caractere, $quantidade){
+
     //Verifica se o caráter não é nulo
     if ( ($caractere == null) || ($quantidade <= 0) ){
         echo "ERRO - repetirCaracter - Parâmetros incorretos.\n";
@@ -450,7 +492,8 @@ function repetirCaracter($caractere, $quantidade){
     }
 
     //Imprime delimitador inicial do vetor vertical
-    return str_repeat($caractere,$quantidade);
+    echo str_repeat($caractere,$quantidade);
+    echo "\n";
     
 }    
 

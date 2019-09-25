@@ -24,7 +24,7 @@ if ($comDelimitadores == 's'){
     $caracter = readline();
     
     //Delimitador será formado pelo caractere repetido, de acordo com o tamanho do maior elemento do vetor
-    $delimitador = repetirCaracter($caracter, $tamMaiorElemVetor);    
+    $delimitador = desenharCaracterRepetido($caracter, $tamMaiorElemVetor);
 }
 else{
     $delimitador = '';
