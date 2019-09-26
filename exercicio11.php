@@ -9,14 +9,7 @@ include "funcoes.php";
 //Criando matriz dinamicamente
 $matriz = criarMatrizDinamicamente();
 
-desenhaMatriz($matriz);
-
-//$matrizCompleta = completarMatriz($matriz);
-
 $matrizTransp = retornaMatrizTransposta($matriz);
-echo"\n";
-desenhaMatriz($matrizTransp);
-echo"\n";
 
 $matrizTranspLinhasAlinhadas = retornarMatrizComLinhasAlinhadas($matrizTransp);
 
