@@ -7,7 +7,7 @@ include "funcoes.php";
 $vetNumeros = array(2, 5, 7, 10);
 
 //Exercício 2
-vetorComMarcadoresInicioFim($vetNumeros,'|','[',']');
+drawArray($vetNumeros,'|','[',']');
 
 
 //print_r( retornaLinha($matNumeros, 0) ); // imprime vetor na tela

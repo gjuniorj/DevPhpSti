@@ -7,6 +7,6 @@ include "funcoes.php";
 echo "INSERIR ELEMENTOS NO VETOR\n\n";
 
 //Inserindo elementos dinamicamente no vetor, com o delimitador especificado no início e no fim de cada elemento
-$vetLinhas = insereElementosDinamicamenteVetor('|');
+$vetLinhas = createArrayDynamically('|');
 
 vetorComSeparador($vetLinhas, "\n");

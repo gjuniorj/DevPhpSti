@@ -7,7 +7,7 @@ include "funcoes.php";
 echo "INSERIR ELEMENTOS NO VETOR\n\n";
 
 //Inserindo elementos dinamicamente no vetor, com o limitador especificado no início e no fim de cada elemento
-$vetor = insereElementosDinamicamenteVetor('');
+$vetor = createArrayDynamically('');
 
 //Calculando o tamanho do elemento com maior número de caracteres no array
 $tamMaiorElem = tamanhoMaiorElementoArray($vetor);

@@ -15,7 +15,7 @@ $vetorBuscado = retornaColuna($matNumeros, $colunaEscolhida);
 
 if ($vetorBuscado != null){
 
-    vetorComMarcadoresInicioFim($vetorBuscado,',','[',']');
+    drawArray($vetorBuscado,',','[',']');
     
 }
 

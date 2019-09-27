@@ -31,57 +31,11 @@ function desenhaMatriz($matriz){
     
     /** @var $linha array */
     foreach ($matriz as $linha) {
-        vetorComMarcadoresInicioFim($linha,'|','|','|');
+        drawArray($linha,'|','|','|');
     }
     
 }
 
-
-
-/**
- * Método que escreve da tela o vetor com o separador passado
- * 
- * @param array $vetor
- * @param string $separador
- */
-function vetorComSeparador($vetor, $separador){
-
-	$tamVetor = count($vetor);
-
-	for ($ind=0; $ind<$tamVetor; $ind++){
-
-		if ($ind == $tamVetor-1){
-			//Imprime último elemento
-			echo $vetor[$ind];	
-		}
-                else {
-                    echo $vetor[$ind];
-                    echo $separador;
-                }
-	}
-
-}
-
-//
-/**
- * Método que escreve na tela um vetor com marcadores incial e final.
- * 
- * @param array $vetor
- * @param string $separador
- * @param string $marcadorInicio
- * @param string $marcadorFim
- */
-function vetorComMarcadoresInicioFim($vetor, $separador, $marcadorInicio, $marcadorFim){
-    
-    echo "$marcadorInicio";
-    
-    vetorComSeparador($vetor, $separador);
-
-    echo "$marcadorFim";
-    
-    echo "\n";
-    
-}
 
 /**
  * Função que retorna o número espaços entre os elementos de um vetor. Estes espaços poderão ser substituídos por um caracter
@@ -208,30 +162,7 @@ function retornaMatrizTransposta($matriz){
     }
 }
 
-/**
- *  Função que insere elementos dinamicamente em um array com o limitador de linha especificado
- * @param char $limitador
- */
-function insereElementosDinamicamenteVetor($limitador = ''){
 
-    $ind = 0;
-    
-    do{
-        echo "Digite elemento: ";
-        $elem = readline();
-        
-        $vetor[$ind] = $limitador.$elem.$limitador;
-        
-        $ind++;
-
-        echo "Inserir outro elemento (s/n): ";
-        $resposta = strtolower(readline());
-
-    } while ($resposta == 's' );    
-    
-    return $vetor;
-    
-}
 
 /**
  * Função que insere elementos dinamicamente na matriz.
