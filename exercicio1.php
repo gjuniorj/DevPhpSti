@@ -2,9 +2,9 @@
 
 include "arrayFunctions.php";
 
-// Exercise 1 - Draws an array with separator (between elements) and initial and final delimiters
+// Exercise 1 - Draws an array with separator (between elements)
 
 $createdArray = createArrayDynamically();
-drawArray($createdArray,'|','[',']');
+drawArray($createdArray,'|','','');
 
 ?>
