@@ -1,6 +1,10 @@
 <?php
 
-//Functions for working with arrays
+/**
+ * Functions for working with arrays
+ * /
+
+
 
 /**
  * Draws an array with separator (between elements) and delimiters (in the beginning and in the end of the array)

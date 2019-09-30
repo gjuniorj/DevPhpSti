@@ -1,4 +1,8 @@
 <?php
+
+
+require "arrayFunctions.php";
+
 /**
  * Função que cria uma matriz randomicamente a partir dos parâmetros fornecidos
  * @return array
