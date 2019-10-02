@@ -7,10 +7,14 @@ include "matrixFunctions.php";
 $createdMatrix = createMatrixDynamically();
 
 drawMatrix($createdMatrix);
-//drawMatrix("macaco");
 echo "\n";
 
+//Returning row number
+$rowNumber = readline("Return row: ");
+$arrayRow = returnMatrixRow($createdMatrix, --$rowNumber);
 
-
+if ( $arrayRow != null )
+    //Draws array row on the screen
+    drawArray($arrayRow, ',', '[', ']');
 
 ?>

@@ -8,14 +8,14 @@ include "arrayFunctions.php";
 
 
 /**
- * Verifies if parameter is a valid matrix.
+ * Checks if parameter is a valid matrix.
  *
  * @param array $matrix
  * @return boolean
  */
 function isValidMatrix($matrix){
 
-    //Verifies if the parameter is an an array (matrix)
+    //Checks if the parameter is an array (matrix)
     if ( !(is_array($matrix))){
         return false;
     }
@@ -35,8 +35,17 @@ function createMatrixDynamically(){
     echo "CREATING A MATRIX\n";
     echo "-----------------\n\n";
 
-    $rows = readline("Rows: ");
-    $columns = readline("Columns: ");
+    //Reads row number and checks if matrix has at least 1 row
+    if ( ($rows = readline("Rows: ")) < 1 ){
+        echo "ERROR - createMatrixDynamically - Matrix must have at least 1 row.\n";
+        exit();
+    }
+
+    //Reads column number and verifies if matrix has at least 1 column
+    if ( ($columns = readline("Columns: ")) < 1 ){
+        echo "ERROR - createMatrixDynamically - Matrix must have at least 1 column.\n";
+        exit();
+    }
 
     //Initializes matrix as an empty array
     $createdMatrix = array();
@@ -78,7 +87,7 @@ function createMatrixDynamically(){
  */
 function drawMatrix($matrix){
 
-    //Verifies if the parameter is an array (matrix)
+    //Checks if the parameter is an array (matrix)
     if ( !isValidMatrix($matrix) ){
         echo "ERROR - drawMatrix: Parameter is not a matrix.\n";
         exit();
@@ -91,6 +100,40 @@ function drawMatrix($matrix){
     }
 
 }
+
+
+/**
+ * Returns specified row in the matrix
+ *
+ * @param array $matrix
+ * @param int $row
+ * @return array
+ */
+function returnMatrixRow($matrix, $row){
+
+    //Checks if parameter is a valid matrix
+    if ( !isValidMatrix($matrix)){
+        echo "ERROR - returnMatrixRow: Parameter is not a matrix.\n";
+        exit();
+    }
+
+    //Checks if specified row is an integer
+    if ( (!is_numeric($row)) || (!is_int($row))  ){
+        echo "ERROR - returnMatrixRow: Specified value is not an integer number.\n";
+        exit();
+    }
+
+    //Checks if specified row is positive and less than the matrix row number
+    $matrixRowNumber = count($matrix);
+    if ( ($row < 0) || ($row >= $matrixRowNumber) ){
+        echo "ERROR - returnMatrixRow: Row number out of matrix limits.\n";
+        exit();
+    }
+
+    return $matrix[$row];
+
+}
+
 
 ?>
 
